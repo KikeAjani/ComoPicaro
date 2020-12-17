@@ -21,7 +21,7 @@ public:
 		FVector SpawnOffset;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UClass* ProjectileClass;
+		TSubclassOf<AProjectile> ProjectileClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool PlayShootAnim;
