@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "../Projectiles/Projectile.h"
-#include "../Projectiles/ProjectilePool.h"
 #include "Components/ActorComponent.h"
 #include "FireComponent.generated.h"
 
@@ -30,9 +29,6 @@ public:
 protected:
 	UPROPERTY()
 		float TimeSinceLastShot;
-
-	UPROPERTY()
-		AProjectilePool* ProjectilePool;
 
 public:
 	// Sets default values for this component's properties

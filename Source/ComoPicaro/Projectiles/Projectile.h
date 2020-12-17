@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <Components/SphereComponent.h>
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -11,10 +12,13 @@ class COMOPICARO_API AProjectile : public APawn
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Speed;
+		int Damage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Damage;
+		float SphereCollisionRadius;
+
+	UPROPERTY(EditAnywhere)
+		USphereComponent* SphereComponent;
 
 public:
 	// Sets default values for this pawn's properties

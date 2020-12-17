@@ -9,6 +9,9 @@ AProjectile::AProjectile()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollision"));
+	SphereComponent->SetSphereRadius(SphereCollisionRadius);
+	RootComponent = SphereComponent;
 }
 
 // Called when the game starts or when spawned
@@ -22,6 +25,4 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	SetActorLocation(GetActorLocation() + (GetActorForwardVector() * (Speed * DeltaTime)));
 }

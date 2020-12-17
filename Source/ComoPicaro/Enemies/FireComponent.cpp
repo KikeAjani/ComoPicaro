@@ -14,9 +14,6 @@ UFireComponent::UFireComponent()
 
 	ResetTimeSinceLastShot();
 	PlayShootAnim = false;
-
-	ProjectilePool = NewObject<AProjectilePool>();
-	ProjectilePool->Init(3);
 }
 
 // Called when the game starts
@@ -45,7 +42,7 @@ void UFireComponent::SpawnProjectile()
 {
 	if (ProjectileClass)
 	{
-		GetOwner()->GetWorld()->SpawnActor<AProjectile>(ProjectileClass, GetOwner()->GetActorLocation() + SpawnOffset, GetOwner()->GetActorRotation());
+		GetOwner()->GetWorld()->SpawnActor<AProjectile>(ProjectileClass, GetOwner()->GetActorLocation() + GetOwner()->GetActorRotation().RotateVector(SpawnOffset), GetOwner()->GetActorRotation());
 	}
 }
 
