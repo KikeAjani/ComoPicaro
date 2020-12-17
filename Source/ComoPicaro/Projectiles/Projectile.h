@@ -14,12 +14,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Damage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float SphereCollisionRadius;
-
-	UPROPERTY(EditAnywhere)
-		USphereComponent* SphereComponent;
-
 public:
 	// Sets default values for this pawn's properties
 	AProjectile();
