@@ -37,12 +37,11 @@ AMainCharacter::AMainCharacter()
 	CameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	CameraComponent->bUsePawnControlRotation = false;	// Camera does not rotate relative to arm
 
-		// Movement
-	MoveSpeed = 1000.0f;
 	// Weapon
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
+
 }
 
 // Called when the game starts or when spawned
@@ -59,60 +58,12 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::Tick(float DeltaSeconds)
 {
  	Super::Tick(DeltaSeconds);
-// // 		 Find movement direction
-// 		const float ForwardValue = GetInputAxisValue(MoveForwardBinding);
-// 		const float RightValue = GetInputAxisValue(MoveRightBinding);
-// 	
-// 		// Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
-// 		const FVector MoveDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
-// 	
-// 		// Calculate  movement
-// 		const FVector Movement = MoveDirection * MoveSpeed * DeltaSeconds;
-// 	
-// 		// If non-zero size, move this actor
-// 		float mov = Movement.SizeSquared();
-// 		if (Movement.SizeSquared() > 0.0f)
-// 		{
-// 
-// 			const FRotator NewRotation = Movement.Rotation();
-// 			lastRotator = NewRotation;
-// 	
-// 			FHitResult Hit(1.f);
-// 	
-// 			RootComponent->MoveComponent(Movement, NewRotation, true, &Hit);
-// 	
-// 
-// 			if (Hit.IsValidBlockingHit())
-// 			{
-// 				const FVector Normal2D = Hit.Normal.GetSafeNormal2D();
-// 				const FVector Deflection = FVector::VectorPlaneProject(Movement, Normal2D) * (1.f - Hit.Time);
-// 				RootComponent->MoveComponent(Deflection, NewRotation, true);
-// 			}
-// 		}
-// 	
-// 		// Create fire direction vector
-// 		const float FireForwardValue = GetInputAxisValue(FireForwardBinding);
-// 		const float FireRightValue = GetInputAxisValue(FireRightBinding);
-// 		const FVector FireDirection = FVector(FireForwardValue, FireRightValue, 0.f);
-// 	
-// 		// Try and fire a shot
-// 		FireShot(FireDirection);
 }
 
 // Called to bind functionality to input
 void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	//check(PlayerInputComponent);
-
-	// set up gameplay key bindings
-// 	PlayerInputComponent->BindAxis(MoveForwardBinding);
-// 	PlayerInputComponent->BindAxis(MoveRightBinding);
-// 
-// 	PlayerInputComponent->BindAxis(FireForwardBinding);
-// 	PlayerInputComponent->BindAxis(FireRightBinding);
-
 	// Set up "movement" bindings.
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMainCharacter::MoveRight);
@@ -159,14 +110,14 @@ void AMainCharacter::ShotTimerExpired()
 
 void AMainCharacter::MoveForward(float Value)
 {
-// 
+
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
 	AddMovementInput(Direction, Value);
-
 }
 
 void AMainCharacter::MoveRight(float Value)
 {
+
 	// Find out which way is "right" and record that the player wants to move that way.
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
 	AddMovementInput(Direction, Value);

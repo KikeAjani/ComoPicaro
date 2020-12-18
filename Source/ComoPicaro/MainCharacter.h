@@ -68,6 +68,7 @@ public:
 	static const FName FireForwardBinding;
 	static const FName FireRightBinding;
 
+
 private:
 
 	/* Flag to control firing  */
