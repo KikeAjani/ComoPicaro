@@ -9,6 +9,7 @@ AEnemy::AEnemy()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Dying = false;
 }
 
 // Called when the game starts or when spawned
@@ -23,7 +24,11 @@ void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	Update(DeltaTime);
+	if ((Health <= 0) && (!Dying))
+	{
+		Die();
+		Dying = true;
+	}
 }
 
 // Called to bind functionality to input
@@ -33,6 +38,8 @@ void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void AEnemy::Update(float DeltaTime)
+void AEnemy::Damage(int Damage)
 {
+	Health -= Damage;
+	Beaten = true;
 }

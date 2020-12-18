@@ -12,7 +12,7 @@ ULookAtPlayerComponent::ULookAtPlayerComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	Active = true;
 }
 
 
@@ -31,8 +31,11 @@ void ULookAtPlayerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	FRotator Rotator = FRotator::ZeroRotator;
-	Rotator.Yaw = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), UGameplayStatics::GetPlayerPawn(this, 0)->GetActorLocation()).Yaw;
-	GetOwner()->SetActorRotation(Rotator);
+	if (Active)
+	{
+		FRotator Rotator = FRotator::ZeroRotator;
+		Rotator.Yaw = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), UGameplayStatics::GetPlayerPawn(this, 0)->GetActorLocation()).Yaw;
+		GetOwner()->SetActorRotation(Rotator);
+	}
 }
 
