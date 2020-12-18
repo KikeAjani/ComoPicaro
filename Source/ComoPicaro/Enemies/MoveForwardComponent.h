@@ -14,7 +14,10 @@ class COMOPICARO_API UMoveForwardComponent : public UActorComponent
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Speed;
+		float Speed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float MaxSpeed;
 
 public:	
 	// Sets default values for this component's properties
