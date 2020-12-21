@@ -26,7 +26,6 @@ void UOscillatingMovementComponent::BeginPlay()
 	if (OscillationCurve)
 	{
 		OscillationCurve->GetTimeRange(CurveTime, CurveDuration);
-		CurveTime = CurveDuration / 4;
 	}
 }
 
