@@ -13,7 +13,10 @@ class COMOPICARO_API AEnemy : public APawn
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Health;
+		int32 Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 Dificulty;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Beaten;
