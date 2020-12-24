@@ -3,32 +3,40 @@
 #include "Engine/Classes/Kismet/GameplayStatics.h"
 #include "MapGenerationLevelScriptActor.h"
 
+void AMapGenerationLevelScriptActor::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GenerateRoom();
+}
+
 void AMapGenerationLevelScriptActor::GenerateRoom()
 {
-	float gridCenter = (TileSize * (GridSize - 1)) / 2;
+	GridCenter = (TileSize * (GridSize - 1)) / 2;
 	for (int32 i = 0; i < GridSize; i++)
 	{
+		TileGrid.Insert(FTileArray(), i);
 		for (int32 j = 0; j < GridSize; j++)
 		{
 			//Get random tile as streaming level
-			int32 randomInt = FMath::RandRange(1, NumOfTilesCreated);
+			int32 randomInt = FMath::RandRange(1, NumOfTileTypes);
 			FString tileString("Tile");
 			tileString.AppendInt(randomInt);
 			FName tileName(tileString);
-			ULevelStreaming* randomLevel = UGameplayStatics::GetStreamingLevel(this, tileName);
-			ensure(randomLevel);
+			ULevelStreaming* randomTileLevel = UGameplayStatics::GetStreamingLevel(this, tileName);
+			ensure(randomTileLevel != nullptr);
 
 			//Create level instance with name "ixj"
 			FString levelInstanceName = FString::FromInt(i);
 			levelInstanceName.Append("x");
 			levelInstanceName.AppendInt(j);
-			randomLevel = randomLevel->CreateInstance(levelInstanceName);
+			randomTileLevel = randomTileLevel->CreateInstance(levelInstanceName);
 
 			//Set transform of level (grid location and random rotation*90)
 			FTransform tileTransform;
 
-			float tileX = (i * TileSize) - gridCenter;
-			float tileY = (j * TileSize) - gridCenter;
+			float tileX = (i * TileSize) - GridCenter;
+			float tileY = (j * TileSize) - GridCenter;
 			FVector tileLocation(tileX, tileY, 0);
 			tileTransform.SetLocation(tileLocation);
 
@@ -36,11 +44,43 @@ void AMapGenerationLevelScriptActor::GenerateRoom()
 			FRotator tileRotation(0, randomRotation, 0);
 			tileTransform.SetRotation(tileRotation.Quaternion());
 
-			randomLevel->LevelTransform = tileTransform;
+			randomTileLevel->LevelTransform = tileTransform;
 
 			//Set loaded and visible
-			randomLevel->SetShouldBeLoaded(true);
-			randomLevel->SetShouldBeVisible(true);
+			randomTileLevel->SetShouldBeLoaded(true);
+			randomTileLevel->SetShouldBeVisible(true);
+			
+			//Set OnTileLoaded Dynamic multicast delegate
+			randomTileLevel->OnLevelLoaded.AddDynamic(this, &AMapGenerationLevelScriptActor::OnTileLoaded);
+			TileGrid[i].Insert(randomTileLevel, j);
 		}
+	} 
+}
+
+ATileLevelScriptActor* AMapGenerationLevelScriptActor::GetRandomTileScriptActor()
+{
+	int32 randomColumn = FMath::RandRange(0, GridSize - 1);
+	int32 randomRow = FMath::RandRange(0, GridSize - 1);
+	return static_cast<ATileLevelScriptActor*>(TileGrid[randomColumn][randomRow]->GetLevelScriptActor());
+}
+
+void AMapGenerationLevelScriptActor::OnTileLoaded()
+{
+	TilesLoaded++;
+	if (TilesLoaded == GridSize * GridSize) {
+		OnAllTilesLoaded();
 	}
+}
+
+void AMapGenerationLevelScriptActor::OnAllTilesLoaded()
+{
+	SpawnEnemies();
+}
+
+void AMapGenerationLevelScriptActor::SpawnEnemies()
+{
+	//TODO Dificulty algorithm
+	int32 randomNum = FMath::RandRange(0, EnemyTypes.Num() - 1);
+	TSubclassOf<AEnemy> enemyClass = EnemyTypes[randomNum];
+	GetRandomTileScriptActor()->SpawnEnemy(enemyClass);
 }
