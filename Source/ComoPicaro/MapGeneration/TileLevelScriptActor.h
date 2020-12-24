@@ -20,5 +20,5 @@ public:
 		ATargetPoint* SpawnTargetPoint;
 
 	UFUNCTION()
-		AEnemy* SpawnEnemy(TSubclassOf<AEnemy> enemyClass, UWorld* world);
+		AEnemy* SpawnEnemy(TSubclassOf<AEnemy> enemyClass);
 };

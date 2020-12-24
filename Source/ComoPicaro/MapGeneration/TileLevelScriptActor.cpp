@@ -3,7 +3,7 @@
 
 #include "TileLevelScriptActor.h"
 
-AEnemy* ATileLevelScriptActor::SpawnEnemy(TSubclassOf<AEnemy> enemyClass, UWorld* world)
+AEnemy* ATileLevelScriptActor::SpawnEnemy(TSubclassOf<AEnemy> enemyClass)
 {
 	AActor* enemyActor = GetWorld()->SpawnActorAbsolute(enemyClass, SpawnTargetPoint->GetActorTransform());
 	AEnemy* enemy = static_cast<AEnemy*>(enemyActor);
