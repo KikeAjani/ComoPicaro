@@ -49,12 +49,12 @@ void AMapGenerationLevelScriptActor::GenerateRoom()
 			//Set loaded and visible
 			randomTileLevel->SetShouldBeLoaded(true);
 			randomTileLevel->SetShouldBeVisible(true);
-			
+
 			//Set OnTileLoaded Dynamic multicast delegate
 			randomTileLevel->OnLevelLoaded.AddDynamic(this, &AMapGenerationLevelScriptActor::OnTileLoaded);
 			TileGrid[i].Insert(randomTileLevel, j);
 		}
-	} 
+	}
 }
 
 ATileLevelScriptActor* AMapGenerationLevelScriptActor::GetRandomTileScriptActor()
@@ -79,8 +79,23 @@ void AMapGenerationLevelScriptActor::OnAllTilesLoaded()
 
 void AMapGenerationLevelScriptActor::SpawnEnemies()
 {
-	//TODO Dificulty algorithm
-	int32 randomNum = FMath::RandRange(0, EnemyTypes.Num() - 1);
-	TSubclassOf<AEnemy> enemyClass = EnemyTypes[randomNum];
-	GetRandomTileScriptActor()->SpawnEnemy(enemyClass);
+	int32 totalDificultyAdded = 0;
+	while (totalDificultyAdded < Dificulty) {
+		int32 randomNum = FMath::RandRange(0, EnemyTypes.Num() - 1);
+		TSubclassOf<AEnemy> enemyClass = EnemyTypes[randomNum];
+		int32 enemyDificulty = enemyClass.GetDefaultObject()->Dificulty;
+		while (enemyDificulty + totalDificultyAdded > Dificulty) {
+			randomNum--;
+			if (randomNum < 0) {
+				break;
+			}
+			enemyClass = EnemyTypes[randomNum];
+			enemyDificulty = enemyClass.GetDefaultObject()->Dificulty;
+		}
+		if (randomNum < 0) {
+			break;
+		}
+		GetRandomTileScriptActor()->SpawnEnemy(enemyClass);
+		totalDificultyAdded += enemyDificulty;
+	}
 }
