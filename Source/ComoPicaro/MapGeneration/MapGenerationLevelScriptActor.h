@@ -54,6 +54,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TArray<TSubclassOf<AEnemy>> EnemyTypes;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		int32 Dificulty = 6;
+
 	UPROPERTY()
 		TArray<FTileArray> TileGrid;
 
