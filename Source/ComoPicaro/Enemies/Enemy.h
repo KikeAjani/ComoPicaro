@@ -15,6 +15,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Health;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Beaten;
+
+private:
+	bool Dying;
+
 public:
 	// Sets default values for this pawn's properties
 	AEnemy();
@@ -31,6 +37,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-		virtual void Update(float DeltaTime);
+		void Damage(int Damage);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void Die();
 
 };

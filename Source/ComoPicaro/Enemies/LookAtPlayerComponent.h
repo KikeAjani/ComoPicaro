@@ -12,6 +12,10 @@ class COMOPICARO_API ULookAtPlayerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Active;
+
 public:	
 	// Sets default values for this component's properties
 	ULookAtPlayerComponent();
