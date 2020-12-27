@@ -42,7 +42,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-protected:
+public:
 	UFUNCTION(BlueprintCallable)
 		void SpawnProjectile();
 
