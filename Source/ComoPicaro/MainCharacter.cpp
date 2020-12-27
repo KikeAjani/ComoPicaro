@@ -54,6 +54,7 @@ void AMainCharacter::BeginPlay()
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	PC->SetViewTargetWithBlend(this);
 	PC->Possess(this);
+	PC->bShowMouseCursor = true;
 }
 
 void AMainCharacter::SimpleShoot()

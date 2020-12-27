@@ -19,7 +19,10 @@ public:
 		bool Beaten;
 
 private:
-	bool Dying;
+	bool Dead;
+	float FadeOutOffset;
+	float FadeOutInitialPosZ;
+	float FadeOutSpeed;
 
 public:
 	// Sets default values for this pawn's properties
@@ -37,9 +40,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-		void Damage(int Damage);
+		void Damage(int32 Damage);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-		void Die();
+	UFUNCTION(BlueprintCallable)
+		void SetFadeOutDestroy(float Offset, float Speed);
 
 };
