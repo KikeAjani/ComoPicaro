@@ -18,6 +18,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Beaten;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Dying;
+
 private:
 	bool Dead;
 	float FadeOutOffset;
@@ -44,5 +47,14 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void SetFadeOutDestroy(float Offset, float Speed);
+
+	UFUNCTION(BlueprintCallable)
+		virtual void SetBeaten(bool _Beaten);
+
+	UFUNCTION(BlueprintCallable)
+		virtual void SetDying(bool _Dying);
+
+protected:
+	void DeactivateCharacterMovementComponent();
 
 };

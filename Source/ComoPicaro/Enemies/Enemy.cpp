@@ -2,6 +2,7 @@
 
 #include "Enemy.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 // Sets default values
@@ -9,6 +10,9 @@ AEnemy::AEnemy()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	Beaten = false;
+	Dying = false;
 
 	Dead = false;
 	FadeOutOffset = 0;
@@ -57,4 +61,24 @@ void AEnemy::SetFadeOutDestroy(float Offset, float Speed)
 	FadeOutOffset = Offset;
 	FadeOutInitialPosZ = GetActorLocation().Z;
 	FadeOutSpeed = Speed;
+}
+
+void AEnemy::DeactivateCharacterMovementComponent()
+{
+	UCharacterMovementComponent* CharacterMovementComponent = Cast<UCharacterMovementComponent>(GetComponentsByTag(UCharacterMovementComponent::StaticClass(), "CharacterMovementComponent")[0]);
+	if (CharacterMovementComponent)
+	{
+		CharacterMovementComponent->Deactivate();
+	}
+}
+
+void AEnemy::SetBeaten(bool _Beaten)
+{
+	Beaten = _Beaten;
+}
+
+void AEnemy::SetDying(bool _Dying)
+{
+	Dying = _Dying;
+	DeactivateCharacterMovementComponent();
 }
