@@ -50,6 +50,8 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TimeSinceLastSimpleAttack = 10000.0f; //Big float to ensure that player can shoot when starts the game
 	
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	PC->SetViewTargetWithBlend(this);
@@ -66,6 +68,9 @@ void AMainCharacter::SimpleShoot()
 void AMainCharacter::Tick(float DeltaSeconds)
 {
  	Super::Tick(DeltaSeconds);
+
+	TimeSinceLastSimpleAttack += DeltaSeconds;
+	UE_LOG(LogTemp, Warning, TEXT("%0.3f"), TimeSinceLastSimpleAttack);
 }
 
 // Called to bind functionality to input
@@ -95,7 +100,7 @@ void AMainCharacter::MoveRight(float Value)
 }
 
 void AMainCharacter::OnSimpleAttack() {
-	if (GEngine)
+	if (GEngine && TimeSinceLastSimpleAttack>=(1/SimpleAttackSpeed))
 	{
 		ACharacter* PCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
 
@@ -119,6 +124,7 @@ void AMainCharacter::OnSimpleAttack() {
 		UKismetSystemLibrary::MoveComponentTo(GetCapsuleComponent(), ActorLocation, NewRotation, true, true, 0.08, true,EMoveComponentAction::Move, info);
 		//When MoveComponentTo finishes rotation, it will execute SimpleShoot() of Child Class
 
+		TimeSinceLastSimpleAttack = 0;
 	}
 
 }

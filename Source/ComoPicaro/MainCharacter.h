@@ -29,6 +29,12 @@ public:
 	/** Sound to play each time we fire */
 	UPROPERTY(Category = Audio, EditAnywhere, BlueprintReadWrite)
 		class USoundBase* FireSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float SimpleAttackSpeed;
+
+private:
+	float TimeSinceLastSimpleAttack;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
