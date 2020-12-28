@@ -43,9 +43,5 @@ void UOscillatingMovementComponent::TickComponent(float DeltaTime, ELevelTick Ti
 		OscillationAddition += (OscillationDirection * OscillationCurve->GetFloatValue(CurveTime) * OscillationAmplitude * DeltaTime);
 	}
 	GetOwner()->SetActorLocation(GetOwner()->GetActorLocation() + ForwardAddition + OscillationAddition);
-
-	FRotator Rotator = FRotator::ZeroRotator;
-	Rotator.Yaw = RotationSpeed;
-	GetOwner()->AddActorLocalRotation(Rotator);
 }
 

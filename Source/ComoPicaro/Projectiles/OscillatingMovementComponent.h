@@ -22,9 +22,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UCurveFloat* OscillationCurve;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float RotationSpeed;
-
 private:
 	FVector Direction;
 	FVector OscillationDirection;
