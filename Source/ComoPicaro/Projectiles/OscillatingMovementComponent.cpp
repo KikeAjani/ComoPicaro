@@ -36,12 +36,13 @@ void UOscillatingMovementComponent::TickComponent(float DeltaTime, ELevelTick Ti
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	FVector ForwardAddition = (Direction * ForwardSpeed * DeltaTime);
+	FVector OscillationAddition = FVector::ZeroVector;
 	if (OscillationCurve)
 	{
 		CurveTime = fmod(CurveTime + DeltaTime, CurveDuration);
-		FVector OscillationAddition = (OscillationDirection * OscillationCurve->GetFloatValue(CurveTime) * OscillationAmplitude);
-		GetOwner()->SetActorLocation(GetOwner()->GetActorLocation() + ForwardAddition + OscillationAddition);
+		OscillationAddition += (OscillationDirection * OscillationCurve->GetFloatValue(CurveTime) * OscillationAmplitude * DeltaTime);
 	}
+	GetOwner()->SetActorLocation(GetOwner()->GetActorLocation() + ForwardAddition + OscillationAddition);
 
 	FRotator Rotator = FRotator::ZeroRotator;
 	Rotator.Yaw = RotationSpeed;
