@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
 UCLASS()
-class COMOPICARO_API AEnemy : public APawn
+class COMOPICARO_API AEnemy : public ACharacter
 {
 	GENERATED_BODY()
 
