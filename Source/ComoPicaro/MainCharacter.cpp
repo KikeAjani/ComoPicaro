@@ -70,7 +70,6 @@ void AMainCharacter::Tick(float DeltaSeconds)
  	Super::Tick(DeltaSeconds);
 
 	TimeSinceLastSimpleAttack += DeltaSeconds;
-	UE_LOG(LogTemp, Warning, TEXT("%0.3f"), TimeSinceLastSimpleAttack);
 }
 
 // Called to bind functionality to input

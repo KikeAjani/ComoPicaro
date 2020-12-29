@@ -33,6 +33,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float SimpleAttackSpeed;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Health;
+
 private:
 	float TimeSinceLastSimpleAttack;
 protected:
