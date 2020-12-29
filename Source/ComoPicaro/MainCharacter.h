@@ -65,6 +65,7 @@ public:
 	UFUNCTION()
 		void MoveRight(float Value);
 
+	void Damage(float Dmg);
 
 	// Static names for axis bindings
 	static const FName MoveForwardBinding;

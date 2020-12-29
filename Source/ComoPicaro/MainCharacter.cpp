@@ -98,6 +98,11 @@ void AMainCharacter::MoveRight(float Value)
 	AddMovementInput(Direction, Value);
 }
 
+void AMainCharacter::Damage(float Dmg)
+{
+	Health -= Dmg;
+}
+
 void AMainCharacter::OnSimpleAttack() {
 	if (GEngine && TimeSinceLastSimpleAttack>=(1/SimpleAttackSpeed))
 	{

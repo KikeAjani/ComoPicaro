@@ -2,7 +2,7 @@
 
 #include "Projectile.h"
 #include "../Enemies/Enemy.h"
-
+#include "../MainCharacter.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -34,12 +34,13 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		Enemy->Damage(Damage);
 	}
+	else {
+		AMainCharacter* MainCharacter = Cast<AMainCharacter>(OtherActor);
 
-// 	A* Character = Cast<A>(OtherActor);
-// 	if (Character)
-// 	{
-// 		Character->Damage(Damage);
-// 	}
-
+		if (MainCharacter) {
+			MainCharacter->Damage(Damage);
+			UE_LOG(LogTemp, Warning, TEXT("%0.3f"), MainCharacter->Health);
+		}
+	}
 	Destroy();
 }
