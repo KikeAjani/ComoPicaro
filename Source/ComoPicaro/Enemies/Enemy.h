@@ -13,7 +13,7 @@ class COMOPICARO_API AEnemy : public ACharacter
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Health;
+		int32 Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Beaten;

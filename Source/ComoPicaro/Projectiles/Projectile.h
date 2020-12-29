@@ -12,7 +12,7 @@ class COMOPICARO_API AProjectile : public APawn
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Damage;
+		int32 Damage;
 
 public:
 	// Sets default values for this pawn's properties

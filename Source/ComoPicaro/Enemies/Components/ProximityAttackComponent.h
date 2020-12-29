@@ -23,6 +23,9 @@ public:
 		float AttackRate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 Damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Attacking;
 
 protected:
