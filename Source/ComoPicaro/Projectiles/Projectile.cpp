@@ -2,7 +2,7 @@
 
 #include "Projectile.h"
 #include "../Enemies/Enemy.h"
-#include "../MainCharacter.h"
+#include "../Characters/MainCharacter.h"
 
 // Sets default values
 AProjectile::AProjectile()
