@@ -40,7 +40,7 @@ void UProximityDamageComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 		if (MainCharacter)
 		{
 			MainCharacter->Damage(Damage);
-			UE_LOG(LogTemp, Warning, TEXT("aaaa %0.3f"), MainCharacter->Health);
+			UE_LOG(LogTemp, Warning, TEXT("proximity damage %0.3f"), MainCharacter->Health);
 		}
 	}
 }
