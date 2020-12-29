@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../Projectiles/Projectile.h"
+#include "../../Projectiles/Projectile.h"
 #include "Components/ActorComponent.h"
 #include "FireComponent.generated.h"
 
@@ -24,7 +24,7 @@ public:
 		TSubclassOf<AProjectile> ProjectileClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool PlayShootAnim;
+		bool Shooting;
 
 protected:
 	UPROPERTY()

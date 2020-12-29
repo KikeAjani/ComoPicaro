@@ -13,7 +13,7 @@ UFireComponent::UFireComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	ResetTimeSinceLastShot();
-	PlayShootAnim = false;
+	Shooting = false;
 }
 
 // Called when the game starts
@@ -34,7 +34,7 @@ void UFireComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	if (TimeSinceLastShot > ShootRate)
 	{
 		ResetTimeSinceLastShot();
-		PlayShootAnim = true;
+		Shooting = true;
 	}
 }
 
