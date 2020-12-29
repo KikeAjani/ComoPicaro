@@ -21,7 +21,6 @@ void AStandingShootingEnemy::Tick(float DeltaTime)
 	if (Health <= 0)
 	{
 		SetDying(true);
-		DeactivateLookAtPlayerComponent();
 	}
 
 	UFireComponent* FireComponent = Cast<UFireComponent>(GetComponentsByTag(UFireComponent::StaticClass(), "FireComponent")[0]);
@@ -31,7 +30,6 @@ void AStandingShootingEnemy::Tick(float DeltaTime)
 	}
 
 	SetBeaten(Beaten);
-
 }
 
 void AStandingShootingEnemy::SetBeaten(bool _Beaten)

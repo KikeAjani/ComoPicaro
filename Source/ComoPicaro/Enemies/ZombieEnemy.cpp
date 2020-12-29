@@ -24,8 +24,6 @@ void AZombieEnemy::Tick(float DeltaTime)
 		SetDying(true);
 	}
 
-	SetBeaten(Beaten);
-
 	UProximityAttackComponent* ProximityAttackComponent = Cast<UProximityAttackComponent>(GetComponentsByTag(UProximityAttackComponent::StaticClass(), "ProximityAttackComponent")[0]);
 	if (ProximityAttackComponent)
 	{
@@ -36,6 +34,7 @@ void AZombieEnemy::Tick(float DeltaTime)
 		SetCharacterMovementComponentSpeed(Speed);
 	}
 
+	SetBeaten(Beaten);
 }
 
 void AZombieEnemy::Hit()
