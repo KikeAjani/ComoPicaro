@@ -20,7 +20,7 @@ const FName AMainCharacter::FireRightBinding("FireRight");
 // Sets default values
 AMainCharacter::AMainCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -44,6 +44,7 @@ AMainCharacter::AMainCharacter()
 
 	MFireComponent = CreateDefaultSubobject<UFireComponent>(TEXT("FireComponent"));
 
+	IsDead = false;
 }
 
 // Called when the game starts or when spawned
@@ -101,7 +102,17 @@ void AMainCharacter::MoveRight(float Value)
 void AMainCharacter::Damage(float Dmg)
 {
 	Health -= Dmg;
+	if (Health <= 0) {
+		IsDead = true;
+		StartDeathAnimation();
+	}
 }
+
+void AMainCharacter::StartDeathAnimation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Death Animation not implemented in this Character"))
+}
+
 
 void AMainCharacter::OnSimpleAttack() {
 	if (GEngine && TimeSinceLastSimpleAttack>=(1/SimpleAttackSpeed))

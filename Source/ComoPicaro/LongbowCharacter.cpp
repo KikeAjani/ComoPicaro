@@ -23,6 +23,13 @@ void ALongbowCharacter::SimpleShoot()
 	//LongbowAnim->IsShooting = false;
 }
 
+void ALongbowCharacter::StartDeathAnimation()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	ULongbowAnimationInstance* LongbowAnim = Cast<ULongbowAnimationInstance>(AnimInstance);
+	LongbowAnim->IsDead = true;
+}
+
 void ALongbowCharacter::BeginPlay() {
 	Super::BeginPlay();
 }

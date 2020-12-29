@@ -25,4 +25,6 @@ public:
 
 	//UFUNCTION(BlueprintCallable)
 	virtual void SimpleShoot() override;
+
+	virtual void StartDeathAnimation() override;
 };

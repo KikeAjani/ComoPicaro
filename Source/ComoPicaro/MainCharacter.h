@@ -37,6 +37,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Health;
 
+	bool IsDead;
+
 private:
 	float TimeSinceLastSimpleAttack;
 protected:
@@ -66,6 +68,8 @@ public:
 		void MoveRight(float Value);
 
 	void Damage(float Dmg);
+
+	virtual void StartDeathAnimation();
 
 	// Static names for axis bindings
 	static const FName MoveForwardBinding;
