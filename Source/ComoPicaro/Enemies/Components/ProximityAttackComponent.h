@@ -29,8 +29,7 @@ public:
 		bool Attacking;
 
 protected:
-	UPROPERTY()
-		float TimeSinceLastAttack;
+	float TimeSinceLastAttack;
 
 public:	
 	// Sets default values for this component's properties
@@ -39,6 +38,8 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	void ResetTimeSinceLastAttack();
 
 public:	
 	// Called every frame
@@ -55,8 +56,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void Hit();
-
-private:
-	void ResetTimeSinceLastAttack();
 		
 };

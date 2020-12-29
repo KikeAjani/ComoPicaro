@@ -4,7 +4,7 @@
 #include "ZombieEnemy.h"
 #include "Components/ProximityAttackComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Components/FollowPlayerAIController.h"
+#include "AI/FollowPlayerAIController.h"
 
 
 // Called when the game starts or when spawned
