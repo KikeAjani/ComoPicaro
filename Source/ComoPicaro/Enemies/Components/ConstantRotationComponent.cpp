@@ -2,6 +2,8 @@
 
 
 #include "ConstantRotationComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values for this component's properties
 UConstantRotationComponent::UConstantRotationComponent()
@@ -10,7 +12,8 @@ UConstantRotationComponent::UConstantRotationComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	DecelerationSpeed = 0;
+	AcelerationSpeed = 0;
 }
 
 
@@ -19,8 +22,6 @@ void UConstantRotationComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
 }
 
 
@@ -32,5 +33,37 @@ void UConstantRotationComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	FRotator Rotator = FRotator::ZeroRotator;
 	Rotator.Yaw = RotationSpeed * DeltaTime;
 	GetOwner()->AddActorLocalRotation(Rotator);
+
+	if (DecelerationSpeed > 0)
+	{
+		if (RotationSpeed > 0)
+		{
+			RotationSpeed = FMath::Max(0.0f, RotationSpeed - (DecelerationSpeed * DeltaTime));
+		}
+		else
+		{
+			DecelerationSpeed = 0;
+		}
+	}
+	else if (AcelerationSpeed > 0)
+	{
+		if (RotationSpeed < MaxRotationSpeed)
+		{
+			RotationSpeed = FMath::Max(MaxRotationSpeed, RotationSpeed + (AcelerationSpeed * DeltaTime));
+		}
+		else
+		{
+			AcelerationSpeed = 0;
+		}
+	}
 }
 
+void UConstantRotationComponent::SetDeceleration(float Speed)
+{
+	DecelerationSpeed = Speed;
+}
+
+void UConstantRotationComponent::SetAceleration(float Speed)
+{
+	AcelerationSpeed = Speed;
+}

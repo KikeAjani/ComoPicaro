@@ -27,6 +27,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float MovementWait;
 
+	UPROPERTY(BlueprintReadOnly)
+		bool Active;
+
+	UPROPERTY(BlueprintReadOnly)
+		bool Stopping;
+
 protected:
 	FVector TargetLocation;
 
@@ -53,5 +59,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void SetShooting(bool _Shooting);
+
+	UFUNCTION(BlueprintCallable)
+		void Activate();
 
 };
