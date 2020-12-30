@@ -34,12 +34,13 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		Enemy->Damage(Damage);
 	}
-	else {
+	else
+	{
 		AMainCharacter* MainCharacter = Cast<AMainCharacter>(OtherActor);
-
-		if (MainCharacter) {
+		if (MainCharacter)
+		{
 			MainCharacter->Damage(Damage);
-			UE_LOG(LogTemp, Warning, TEXT("%0.3f"), MainCharacter->Health);
+			UE_LOG(LogTemp, Warning, TEXT("Character Health: %0.0f"), MainCharacter->Health);
 		}
 	}
 	Destroy();

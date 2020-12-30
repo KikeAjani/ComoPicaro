@@ -81,4 +81,10 @@ void AEnemy::SetDying(bool _Dying)
 {
 	Dying = _Dying;
 	DeactivateCharacterMovementComponent();
+	DisableCollision();
+}
+
+void AEnemy::DisableCollision()
+{
+	SetActorEnableCollision(false);
 }

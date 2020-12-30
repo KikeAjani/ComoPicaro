@@ -35,6 +35,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void DeactivateCharacterMovementComponent();
+
+	void DisableCollision();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -54,7 +58,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 		virtual void SetDying(bool _Dying);
 
-protected:
-	void DeactivateCharacterMovementComponent();
 
 };
