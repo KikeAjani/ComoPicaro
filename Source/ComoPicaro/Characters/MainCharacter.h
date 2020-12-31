@@ -39,14 +39,24 @@ public:
 
 	bool IsDead;
 
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	float ExtraDamageSimpleAttack;
+
+	TArray<APowerUp*> ListOfHabilities;
+	
+
 private:
 	float TimeSinceLastSimpleAttack;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	virtual void OnSimpleAttack();
 
+	UFUNCTION(BlueprintCallable)
+	void AddHability(APowerUp* Hability);
 
 
 public:	

@@ -19,7 +19,7 @@ void ALongbowCharacter::SimpleShoot()
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	ULongbowAnimationInstance* LongbowAnim = Cast<ULongbowAnimationInstance>(AnimInstance);
 	LongbowAnim->IsShooting = true;
-	MFireComponent->SpawnProjectile();
+	MFireComponent->SpawnProjectile(ExtraDamageSimpleAttack);
 	//LongbowAnim->IsShooting = false;
 }
 

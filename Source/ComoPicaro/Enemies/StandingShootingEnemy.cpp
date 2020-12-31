@@ -51,7 +51,7 @@ void AStandingShootingEnemy::Fire()
 	UFireComponent* FireComponent = Cast<UFireComponent>(GetComponentsByTag(UFireComponent::StaticClass(), "FireComponent")[0]);
 	if (FireComponent)
 	{
-		FireComponent->SpawnProjectile();
+		FireComponent->SpawnProjectile(0);
 	}
 }
 

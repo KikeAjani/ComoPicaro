@@ -142,3 +142,8 @@ void AMainCharacter::OnSimpleAttack() {
 	}
 
 }
+
+void AMainCharacter::AddHability(APowerUp* Hability)
+{
+	ListOfHabilities.Add(Hability);
+}

@@ -15,6 +15,7 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
 }
 
@@ -22,6 +23,11 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void AProjectile::AddExtraDamage(int32 ExtraDmg)
+{
+	Damage += ExtraDmg;
 }
 
 

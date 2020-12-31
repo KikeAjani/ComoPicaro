@@ -12,7 +12,7 @@ class COMOPICARO_API AProjectile : public APawn
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Damage;
+		int32 Damage;
 
 public:
 	// Sets default values for this pawn's properties
@@ -25,6 +25,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void AddExtraDamage(int32 ExtraDmg);
 
 	UFUNCTION()
 		void NotifyActorBeginOverlap(AActor* OtherActor) override;

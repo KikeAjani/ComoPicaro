@@ -44,7 +44,7 @@ public:
 
 public:
 	UFUNCTION(BlueprintCallable)
-		void SpawnProjectile();
+		void SpawnProjectile(float ExtraDamage);
 
 private:
 	void ResetTimeSinceLastShot();

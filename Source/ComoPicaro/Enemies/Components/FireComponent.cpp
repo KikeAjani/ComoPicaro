@@ -38,11 +38,14 @@ void UFireComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	}
 }
 
-void UFireComponent::SpawnProjectile()
+
+void UFireComponent::SpawnProjectile(float ExtraDamage)
 {
 	if (ProjectileClass)
 	{
-		GetOwner()->GetWorld()->SpawnActor<AProjectile>(ProjectileClass, GetOwner()->GetActorLocation() + GetOwner()->GetActorRotation().RotateVector(SpawnOffset), GetOwner()->GetActorRotation());
+		AProjectile* Projectile = GetOwner()->GetWorld()->SpawnActor<AProjectile>(ProjectileClass, GetOwner()->GetActorLocation() + GetOwner()->GetActorRotation().RotateVector(SpawnOffset), GetOwner()->GetActorRotation());
+		Projectile->AddExtraDamage(ExtraDamage);
+
 	}
 }
 
