@@ -19,7 +19,14 @@ void ALongbowCharacter::SimpleShoot()
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	ULongbowAnimationInstance* LongbowAnim = Cast<ULongbowAnimationInstance>(AnimInstance);
 	LongbowAnim->IsShooting = true;
-	MFireComponent->SpawnProjectile(ExtraDamageSimpleAttack);
+	//MFireComponent->SpawnProjectile(ExtraDamageSimpleAttack);
+	TArray<UFireComponent*> FireComps;
+	GetComponents(FireComps);
+	for (UFireComponent* FireComponent: FireComps)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("%0.3f %0.3f %0.3f"), FireComponent->SpawnOffset.X, FireComponent->SpawnOffset.Y, FireComponent->SpawnOffset.Z)
+		FireComponent->SpawnProjectile(ExtraDamageSimpleAttack);
+	}
 	//LongbowAnim->IsShooting = false;
 }
 

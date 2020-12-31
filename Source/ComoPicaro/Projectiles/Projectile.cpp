@@ -39,6 +39,7 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 	if (Enemy)
 	{
 		Enemy->Damage(Damage);
+		UE_LOG(LogTemp, Warning, TEXT("Hitted"));
 	}
 	else {
 		AMainCharacter* MainCharacter = Cast<AMainCharacter>(OtherActor);
