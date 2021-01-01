@@ -18,7 +18,7 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		float Speed;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float MaxSpeed;
 
 	UPROPERTY(BlueprintReadOnly)
