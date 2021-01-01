@@ -35,6 +35,7 @@ public:
 
 protected:
 	FVector TargetLocation;
+	float MinTargetDistance;
 
 	int32 CurrentMovement;
 	float TimeToNextMovement;

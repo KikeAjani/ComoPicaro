@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/FireComponent.h"
 #include "Components/ConstantRotationComponent.h"
+#include "Components/ProximityDamageComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -20,6 +21,12 @@ void AWarrokBoss::BeginPlay()
 
 	Active = false;
 	Stopping = false;
+
+	UProximityDamageComponent* ProximityDamageComponent = Cast<UProximityDamageComponent>(GetComponentsByTag(UProximityDamageComponent::StaticClass(), "ProximityDamageComponent")[0]);
+	if (ProximityDamageComponent)
+	{
+		MinTargetDistance = ProximityDamageComponent->DamageRange / 2;
+	}
 }
 
 // Called every frame
@@ -87,7 +94,7 @@ void AWarrokBoss::Tick(float DeltaTime)
 			}
 			else
 			{
-				if (FVector::Distance(GetActorLocation(), TargetLocation) > (Speed / 10))
+				if (FVector::Distance(GetActorLocation(), TargetLocation) > MinTargetDistance)
 				{
 					FVector Direction = (TargetLocation - GetActorLocation());
 					Direction.Normalize();
