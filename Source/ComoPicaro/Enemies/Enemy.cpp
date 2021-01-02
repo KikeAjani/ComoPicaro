@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Enemy.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 AEnemy::AEnemy()
@@ -9,7 +11,13 @@ AEnemy::AEnemy()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Beaten = false;
 	Dying = false;
+
+	Dead = false;
+	FadeOutOffset = 0;
+	FadeOutInitialPosZ = 0;
+	FadeOutSpeed = 0;
 }
 
 // Called when the game starts or when spawned
@@ -24,10 +32,14 @@ void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if ((Health <= 0) && (!Dying))
+	if (Dead)
 	{
-		Die();
-		Dying = true;
+		SetActorLocation(GetActorLocation() - (FVector::UpVector * FadeOutSpeed * DeltaTime));
+		if (GetActorLocation().Z < (FadeOutInitialPosZ - FadeOutOffset))
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Destroyed"));
+			Destroy();
+		}
 	}
 }
 
@@ -35,11 +47,44 @@ void AEnemy::Tick(float DeltaTime)
 void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
-void AEnemy::Damage(int Damage)
+void AEnemy::Damage(int32 Damage)
 {
 	Health -= Damage;
 	Beaten = true;
+}
+
+void AEnemy::SetFadeOutDestroy(float Offset, float Speed)
+{
+	Dead = true;
+	FadeOutOffset = Offset;
+	FadeOutInitialPosZ = GetActorLocation().Z;
+	FadeOutSpeed = Speed;
+}
+
+void AEnemy::DeactivateCharacterMovementComponent()
+{
+	UCharacterMovementComponent* CharacterMovementComponent = Cast<UCharacterMovementComponent>(GetComponentsByTag(UCharacterMovementComponent::StaticClass(), "CharacterMovementComponent")[0]);
+	if (CharacterMovementComponent)
+	{
+		CharacterMovementComponent->Deactivate();
+	}
+}
+
+void AEnemy::SetBeaten(bool _Beaten)
+{
+	Beaten = _Beaten;
+}
+
+void AEnemy::SetDying(bool _Dying)
+{
+	Dying = _Dying;
+	DeactivateCharacterMovementComponent();
+	DisableCollision();
+}
+
+void AEnemy::DisableCollision()
+{
+	SetActorEnableCollision(false);
 }
