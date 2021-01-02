@@ -3,7 +3,7 @@
 
 #include "ProximityAttackComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "../../MainCharacter.h"
+#include "../../Characters/MainCharacter.h"
 
 
 // Sets default values for this component's properties

@@ -61,7 +61,7 @@ void AWarrokBoss::Tick(float DeltaTime)
 			UFireComponent* FireComponent = Cast<UFireComponent>(GetComponentsByTag(UFireComponent::StaticClass(), "FireComponent")[0]);
 			if (FireComponent && FireComponent->Shooting)
 			{
-				FireComponent->SpawnProjectile();
+				FireComponent->SpawnProjectile(0);
 				FireComponent->Shooting = false;
 			}
 			TimeShooting += DeltaTime;

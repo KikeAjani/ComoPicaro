@@ -2,7 +2,7 @@
 
 
 #include "ProximityDamageComponent.h"
-#include "../../MainCharacter.h"
+#include "../../Characters/MainCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
 
