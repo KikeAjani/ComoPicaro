@@ -14,7 +14,14 @@ class COMOPICARO_API UConstantRotationComponent : public UActorComponent
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float MaxRotationSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float RotationSpeed;
+
+protected:
+	float DecelerationSpeed;
+	float AcelerationSpeed;
 
 public:	
 	// Sets default values for this component's properties
@@ -28,5 +35,10 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
+		void SetDeceleration(float Speed);
+
+	UFUNCTION(BlueprintCallable)
+		void SetAceleration(float Speed);
 		
 };

@@ -18,7 +18,7 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		float Speed;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float MaxSpeed;
 
 	UPROPERTY(BlueprintReadOnly)
@@ -32,7 +32,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-public:
 	virtual void SetBeaten(bool _Beaten) override;
 
 	UFUNCTION(BlueprintCallable)

@@ -3,6 +3,8 @@
 
 #include "ProximityAttackComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "../../MainCharacter.h"
+
 
 // Sets default values for this component's properties
 UProximityAttackComponent::UProximityAttackComponent()
@@ -58,7 +60,11 @@ void UProximityAttackComponent::Hit()
 {
 	if (DistanceInRange())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("hit!"));
+		AMainCharacter* MainCharacter = Cast<AMainCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
+		if (MainCharacter)
+		{
+			MainCharacter->Damage(Damage);
+		}
 	}
 }
 

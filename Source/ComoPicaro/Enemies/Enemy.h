@@ -13,7 +13,7 @@ class COMOPICARO_API AEnemy : public ACharacter
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Health;
+		int32 Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Beaten;
@@ -35,6 +35,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void DeactivateCharacterMovementComponent();
+
+	void DisableCollision();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -54,7 +58,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 		virtual void SetDying(bool _Dying);
 
-protected:
-	void DeactivateCharacterMovementComponent();
 
 };
