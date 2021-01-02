@@ -42,8 +42,10 @@ AMainCharacter::AMainCharacter()
 
 
 	MFireComponent = CreateDefaultSubobject<UFireComponent>(TEXT("FireComponent"));
-
+	UltimateFireComponent = CreateDefaultSubobject<UFireComponent>(TEXT("UltimateFireComponent"));
 	IsDead = false;
+
+	PointsToUltimate = 100;
 }
 
 // Called when the game starts or when spawned
@@ -64,6 +66,11 @@ void AMainCharacter::SimpleShoot()
 	UE_LOG(LogTemp, Warning, TEXT("SimpleShoot is not implemented in child class"));
 }
 
+void AMainCharacter::MUltimate()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Ultimate is not implemented in child class"));
+}
+
 // Called every frame
 void AMainCharacter::Tick(float DeltaSeconds)
 {
@@ -81,6 +88,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMainCharacter::MoveRight);
 
 	PlayerInputComponent->BindAction("SimpleAttack", IE_Pressed, this, &AMainCharacter::OnSimpleAttack);
+	PlayerInputComponent->BindAction("Ultimate", IE_Pressed, this, &AMainCharacter::OnUltimate);
 
 }
 
@@ -116,31 +124,53 @@ void AMainCharacter::StartDeathAnimation()
 void AMainCharacter::OnSimpleAttack() {
 	if (GEngine && TimeSinceLastSimpleAttack>=(1/SimpleAttackSpeed))
 	{
-		ACharacter* PCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
-
-		FRotator ActorRotation = PCharacter->GetActorRotation();
-
-		FHitResult HitResult;
-
-		APlayerController* PController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-		PController->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), true, HitResult);
-
-		FVector ActorLocation = PCharacter->GetActorLocation();
-		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(ActorLocation,HitResult.Location);
-
-		FRotator NewRotation =  FRotator(ActorRotation.Pitch, LookAtRotation.Yaw, ActorRotation.Roll);
-
 		FLatentActionInfo info = FLatentActionInfo();
 		info.CallbackTarget = this;
 		info.UUID = 0;
 		info.Linkage = 1;
 		info.ExecutionFunction = FName("SimpleShoot");
-		UKismetSystemLibrary::MoveComponentTo(GetCapsuleComponent(), ActorLocation, NewRotation, true, true, 0.08, true,EMoveComponentAction::Move, info);
-		//When MoveComponentTo finishes rotation, it will execute SimpleShoot() of Child Class
 
+		RotationToAttack(info);
+		
 		TimeSinceLastSimpleAttack = 0;
 	}
 
+}
+
+
+void AMainCharacter::RotationToAttack(FLatentActionInfo info)
+{
+	ACharacter* PCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
+
+	FRotator ActorRotation = PCharacter->GetActorRotation();
+
+	FHitResult HitResult;
+
+	APlayerController* PController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	PController->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), true, HitResult);
+
+	FVector ActorLocation = PCharacter->GetActorLocation();
+	FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(ActorLocation, HitResult.Location);
+
+	FRotator NewRotation = FRotator(ActorRotation.Pitch, LookAtRotation.Yaw, ActorRotation.Roll);
+
+	UKismetSystemLibrary::MoveComponentTo(GetCapsuleComponent(), ActorLocation, NewRotation, true, true, 0.08, true, EMoveComponentAction::Move, info);
+	//When MoveComponentTo finishes rotation, it will execute SimpleShoot() of Child Class
+
+}
+
+
+void AMainCharacter::OnUltimate()
+{
+	if (PointsToUltimate >= 100) {
+		FLatentActionInfo info = FLatentActionInfo();
+		info.CallbackTarget = this;
+		info.UUID = 0;
+		info.Linkage = 1;
+		info.ExecutionFunction = FName("MUltimate");
+		RotationToAttack(info);
+		PointsToUltimate = 100;
+	}
 }
 
 void AMainCharacter::AddHability(APowerUp* Hability)

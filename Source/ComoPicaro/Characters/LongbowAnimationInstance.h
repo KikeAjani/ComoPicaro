@@ -22,5 +22,8 @@ public:
 		bool IsShooting;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool IsUltimating;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool IsDead;
 };

@@ -22,6 +22,9 @@ class COMOPICARO_API AMainCharacter : public ACharacter
 protected:
 	UPROPERTY(Category = Fire, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class UFireComponent* MFireComponent;
+
+	UPROPERTY(Category = Fire, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+		class UFireComponent* UltimateFireComponent;
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
@@ -44,16 +47,21 @@ public:
 
 	TArray<APowerUp*> ListOfHabilities;
 	
+	int PointsToUltimate;
 
 private:
 	float TimeSinceLastSimpleAttack;
 
+
+private:
+	void RotationToAttack(FLatentActionInfo info);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	virtual void OnSimpleAttack();
+	virtual void OnUltimate();
 
 	UFUNCTION(BlueprintCallable)
 	void AddHability(APowerUp* Hability);
@@ -62,6 +70,8 @@ protected:
 public:	
 	UFUNCTION(BlueprintCallable)
 		virtual void SimpleShoot();
+
+		virtual void MUltimate();
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;

@@ -44,7 +44,6 @@ void UFireComponent::SpawnProjectile(float ExtraDamage)
 	if (ProjectileClass)
 	{
 		AProjectile* Projectile = GetOwner()->GetWorld()->SpawnActor<AProjectile>(ProjectileClass, GetOwner()->GetActorLocation() + GetOwner()->GetActorRotation().RotateVector(SpawnOffset), GetOwner()->GetActorRotation());
-
 		Projectile->AddExtraDamage(ExtraDamage);
 
 	}

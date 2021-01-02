@@ -22,9 +22,12 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void OnSimpleAttack() override;
+	virtual void OnUltimate() override;
 
 	//UFUNCTION(BlueprintCallable)
 	virtual void SimpleShoot() override;
 
+	UFUNCTION(BlueprintNativeEvent)
+	void MUltimate() override;
 	virtual void StartDeathAnimation() override;
 };
