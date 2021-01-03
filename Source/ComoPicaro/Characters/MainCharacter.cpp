@@ -89,6 +89,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("SimpleAttack", IE_Pressed, this, &AMainCharacter::OnSimpleAttack);
 	PlayerInputComponent->BindAction("Ultimate", IE_Pressed, this, &AMainCharacter::OnUltimate);
+	PlayerInputComponent->BindAction("DisableAA", IE_Released, this, &AMainCharacter::DisableLeftClickPressed);
 
 }
 
@@ -120,8 +121,14 @@ void AMainCharacter::StartDeathAnimation()
 	UE_LOG(LogTemp, Warning, TEXT("Death Animation not implemented in this Character"))
 }
 
+void AMainCharacter::DisableLeftClickPressed()
+{
+	IsLeftClickPressed = false;
+}
+
 
 void AMainCharacter::OnSimpleAttack() {
+	IsLeftClickPressed = true;
 	if (GEngine && TimeSinceLastSimpleAttack>=(1/SimpleAttackSpeed))
 	{
 		FLatentActionInfo info = FLatentActionInfo();

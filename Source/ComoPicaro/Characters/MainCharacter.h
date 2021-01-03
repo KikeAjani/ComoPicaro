@@ -40,6 +40,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Health;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool IsLeftClickPressed;
+
 	bool IsDead;
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
@@ -60,6 +63,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
 	virtual void OnSimpleAttack();
 	virtual void OnUltimate();
 
@@ -90,6 +94,8 @@ public:
 	void Damage(float Dmg);
 
 	virtual void StartDeathAnimation();
+
+	void DisableLeftClickPressed();
 
 	// Static names for axis bindings
 	static const FName MoveForwardBinding;
