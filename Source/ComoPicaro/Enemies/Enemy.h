@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
 UCLASS()
-class COMOPICARO_API AEnemy : public APawn
+class COMOPICARO_API AEnemy : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -21,8 +21,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Beaten;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Dying;
+
 private:
-	bool Dying;
+	bool Dead;
+	float FadeOutOffset;
+	float FadeOutInitialPosZ;
+	float FadeOutSpeed;
 
 public:
 	// Sets default values for this pawn's properties
@@ -32,7 +38,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+	void DeactivateCharacterMovementComponent();
+
+	void DisableCollision();
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -40,9 +50,14 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-		void Damage(int Damage);
+		void Damage(int32 Damage);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-		void Die();
+	UFUNCTION(BlueprintCallable)
+		void SetFadeOutDestroy(float Offset, float Speed);
 
+	UFUNCTION(BlueprintCallable)
+		virtual void SetBeaten(bool _Beaten);
+
+	UFUNCTION(BlueprintCallable)
+		virtual void SetDying(bool _Dying);
 };
