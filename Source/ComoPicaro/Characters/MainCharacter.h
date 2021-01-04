@@ -86,8 +86,7 @@ public:
 	// Handles input for moving right and left.
 	UFUNCTION()
 		void MoveRight(float Value);
-
-	void Damage(float Dmg);
+		void Damage(float Dmg);
 
 	virtual void StartDeathAnimation();
 
