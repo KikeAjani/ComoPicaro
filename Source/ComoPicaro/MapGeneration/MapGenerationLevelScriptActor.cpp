@@ -89,6 +89,7 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 			if (randomNum < 0) {
 				break;
 			}
+			randomNum = FMath::RandRange(0, randomNum);
 			enemyClass = EnemyTypes[randomNum];
 			enemyDificulty = enemyClass.GetDefaultObject()->Dificulty;
 		}
