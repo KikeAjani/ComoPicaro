@@ -12,8 +12,8 @@ class COMOPICARO_API AMainCharacter : public ACharacter
 	GENERATED_BODY()
 
 
-	/** The camera */
-	UPROPERTY(Category = Camera, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+		/** The camera */
+		UPROPERTY(Category = Camera, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* CameraComponent;
 
 	/** Camera boom positioning the camera above the character */
@@ -29,24 +29,28 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
-	/** Sound to play each time we fire */
-	UPROPERTY(Category = Audio, EditAnywhere, BlueprintReadWrite)
-		class USoundBase* FireSound;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float SimpleAttackSpeed;
+		int32 SimpleAttackSpeed;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Health;
+		int32 Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 ActualHealth;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool IsLeftClickPressed;
 
 	bool IsDead;
 
-	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
-	float ExtraDamageSimpleAttack;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		int32 ExtraDamageSimpleAttack;
 
-	TArray<APowerUp*> ListOfHabilities;
-	
+	//TArray<APowerUp*> ListOfHabilities;
+
 	int PointsToUltimate;
 
 private:
@@ -60,18 +64,19 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	virtual void OnSimpleAttack();
+	UFUNCTION(BlueprintCallable)
+		virtual void OnSimpleAttack();
 	virtual void OnUltimate();
 
 	UFUNCTION(BlueprintCallable)
-	void AddHability(APowerUp* Hability);
+		void AddHability(APowerUp* Hability);
 
 
-public:	
+public:
 	UFUNCTION(BlueprintCallable)
 		virtual void SimpleShoot();
 
-		virtual void MUltimate();
+	virtual void MUltimate();
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
@@ -86,9 +91,12 @@ public:
 	// Handles input for moving right and left.
 	UFUNCTION()
 		void MoveRight(float Value);
-		void Damage(float Dmg);
+
+	void Damage(int32 Dmg);
 
 	virtual void StartDeathAnimation();
+
+	void DisableLeftClickPressed();
 
 	// Static names for axis bindings
 	static const FName MoveForwardBinding;

@@ -16,6 +16,9 @@ public:
 		int32 Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 Dificulty;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Beaten;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -39,7 +42,7 @@ protected:
 
 	void DisableCollision();
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -57,6 +60,4 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		virtual void SetDying(bool _Dying);
-
-
 };

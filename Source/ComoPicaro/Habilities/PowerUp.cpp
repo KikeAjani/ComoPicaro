@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "PowerUp.h"
 
 // Sets default values
@@ -8,11 +7,6 @@ APowerUp::APowerUp()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-// 	BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComponent"));
-// 	BoxComponent->SetupAttachment(RootComponent);
-// 	StaticMeshHability = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshHability"));
-// 	StaticMeshHability->SetupAttachment(BoxComponent);
 }
 
 // Called when the game starts or when spawned

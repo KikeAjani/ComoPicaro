@@ -80,6 +80,7 @@ void AEnemy::SetBeaten(bool _Beaten)
 void AEnemy::SetDying(bool _Dying)
 {
 	Dying = _Dying;
+	Beaten = false;
 	DeactivateCharacterMovementComponent();
 	DisableCollision();
 }
