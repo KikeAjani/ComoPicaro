@@ -29,23 +29,23 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
-	/** Sound to play each time we fire */
-	UPROPERTY(Category = Audio, EditAnywhere, BlueprintReadWrite)
-		class USoundBase* FireSound;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float SimpleAttackSpeed;
+		int32 SimpleAttackSpeed;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Health;
+		int32 Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 ActualHealth;
 
 	bool IsDead;
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
-	float ExtraDamageSimpleAttack;
+		int32 ExtraDamageSimpleAttack;
 
-	TArray<APowerUp*> ListOfHabilities;
+	//TArray<APowerUp*> ListOfHabilities;
 	
 	int PointsToUltimate;
 
@@ -87,7 +87,7 @@ public:
 	UFUNCTION()
 		void MoveRight(float Value);
 
-	void Damage(float Dmg);
+	void Damage(int32 Dmg);
 
 	virtual void StartDeathAnimation();
 

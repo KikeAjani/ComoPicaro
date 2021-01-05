@@ -1,13 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "PowerUp.generated.h"
 
-UCLASS()
-class COMOPICARO_API APowerUp : public AActor
+UCLASS(BlueprintType)
+class COMOPICARO_API APowerUp : public AActor 
 {
 	GENERATED_BODY()
 	
