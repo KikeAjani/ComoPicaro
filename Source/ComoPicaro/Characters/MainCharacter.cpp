@@ -10,6 +10,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Components/CapsuleComponent.h"
+#include "../ComoPicaroGameInstance.h"
 
 const FName AMainCharacter::MoveForwardBinding("MoveForward");
 const FName AMainCharacter::MoveRightBinding("MoveRight");
@@ -23,9 +24,6 @@ AMainCharacter::AMainCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	// Cache our sound effect
-	static ConstructorHelpers::FObjectFinder<USoundBase> FireAudio(TEXT("/Game/TwinStick/Audio/TwinStickFire.TwinStickFire"));
-	FireSound = FireAudio.Object;
 
 	// Create a camera boom...
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -52,6 +50,7 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	ActualHealth = Health;
 
 	TimeSinceLastSimpleAttack = 10000.0f; //Big float to ensure that player can shoot when starts the game
 	
@@ -107,10 +106,10 @@ void AMainCharacter::MoveRight(float Value)
 	AddMovementInput(Direction, Value);
 }
 
-void AMainCharacter::Damage(float Dmg)
+void AMainCharacter::Damage(int32 Dmg)
 {
-	Health -= Dmg;
-	if (Health <= 0) {
+	ActualHealth -= Dmg;
+	if (ActualHealth <= 0) {
 		IsDead = true;
 		StartDeathAnimation();
 	}
@@ -127,9 +126,10 @@ void AMainCharacter::DisableLeftClickPressed()
 }
 
 
+
 void AMainCharacter::OnSimpleAttack() {
 	IsLeftClickPressed = true;
-	if (GEngine && TimeSinceLastSimpleAttack>=(1/SimpleAttackSpeed))
+	if (GEngine && TimeSinceLastSimpleAttack>=(1.0f/float(SimpleAttackSpeed)))
 	{
 		FLatentActionInfo info = FLatentActionInfo();
 		info.CallbackTarget = this;
@@ -180,7 +180,11 @@ void AMainCharacter::OnUltimate()
 	}
 }
 
-void AMainCharacter::AddHability(APowerUp* Hability)
+void AMainCharacter::AddHability(APowerUp* PwUp)
 {
-	ListOfHabilities.Add(Hability);
+	UGameInstance *GI= UGameplayStatics::GetGameInstance(this);
+	UComoPicaroGameInstance *ComoPicaroGI =  Cast<UComoPicaroGameInstance>(GI);
+
+ 	ComoPicaroGI->PlayerListPowerUp.Add(PwUp);
+	
 }

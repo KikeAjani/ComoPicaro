@@ -39,7 +39,7 @@ void UFireComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 }
 
 
-void UFireComponent::SpawnProjectile(float ExtraDamage)
+void UFireComponent::SpawnProjectile(int32 ExtraDamage)
 {
 	if (ProjectileClass)
 	{
