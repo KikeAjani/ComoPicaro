@@ -16,6 +16,9 @@ public:
 		int32 Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 InitialHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 Dificulty;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
