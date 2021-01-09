@@ -24,6 +24,7 @@ AEnemy::AEnemy()
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	InitialHealth = Health;
 	
 }
 
