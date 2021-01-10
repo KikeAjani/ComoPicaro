@@ -7,15 +7,15 @@ AEnemy* ATileLevelScriptActor::SpawnEnemy(TSubclassOf<AEnemy> enemyClass)
 {
 	FTransform spawnTransform = SpawnTargetPoint->GetTransform();
 
-	AEnemy* defaultEnemy = static_cast<AEnemy*>(enemyClass->GetDefaultObject());
-	FVector defaultScale = defaultEnemy->GetActorScale();
-	spawnTransform.SetScale3D(defaultScale);
-
 	FActorSpawnParameters spawnParams;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
 	AActor* enemyActor = GetWorld()->SpawnActorAbsolute(enemyClass, spawnTransform, spawnParams);
 	AEnemy* enemy = static_cast<AEnemy*>(enemyActor);
+
+	AEnemy* defaultEnemy = static_cast<AEnemy*>(enemyClass->GetDefaultObject());
+	FVector defaultScale = defaultEnemy->GetActorScale();
+	enemy->SetActorScale3D(defaultScale);
 
 	FVector originalLocation = enemy->GetActorLocation();
 	FVector boundOrigin;
