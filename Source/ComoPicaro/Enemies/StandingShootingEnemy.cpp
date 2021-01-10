@@ -27,7 +27,7 @@ void AStandingShootingEnemy::Tick(float DeltaTime)
 	UFireComponent* FireComponent = Cast<UFireComponent>(GetComponentsByTag(UFireComponent::StaticClass(), "FireComponent")[0]);
 	if (FireComponent)
 	{
-		Shooting = FireComponent->Shooting;
+		Shooting = ((Health > 0) && (FireComponent->Shooting));
 	}
 
 	SetBeaten(Beaten);

@@ -27,7 +27,7 @@ void AZombieEnemy::Tick(float DeltaTime)
 	UProximityAttackComponent* ProximityAttackComponent = Cast<UProximityAttackComponent>(GetComponentsByTag(UProximityAttackComponent::StaticClass(), "ProximityAttackComponent")[0]);
 	if (ProximityAttackComponent)
 	{
-		Attacking = ProximityAttackComponent->Attacking;
+		Attacking = ((Health > 0) && (ProximityAttackComponent->Attacking));
 		bool Active = (!ProximityAttackComponent->DistanceAbleToAttack()) && (!Beaten) && (!Attacking) && (!Dying);
 		SetAIActive(Active);
 		Speed = (Active ? MaxSpeed : 0);
