@@ -5,7 +5,7 @@
 void AMapGenerationLevelScriptActor::BeginPlay()
 {
 	Super::BeginPlay();
-
+	LoadInfo();
 	GenerateRoom();
 }
 
@@ -80,11 +80,12 @@ void AMapGenerationLevelScriptActor::OnAllTilesLoaded()
 void AMapGenerationLevelScriptActor::SpawnEnemies()
 {
 	int32 totalDificultyAdded = 0;
-	while (totalDificultyAdded < Dificulty) {
+	int32 levelDificulty = static_cast<UComoPicaroGameInstance*>(UGameplayStatics::GetGameInstance(this))->LevelDificulty;
+	while (totalDificultyAdded < levelDificulty) {
 		int32 randomNum = FMath::RandRange(0, EnemyTypes.Num() - 1);
 		TSubclassOf<AEnemy> enemyClass = EnemyTypes[randomNum];
 		int32 enemyDificulty = enemyClass.GetDefaultObject()->Dificulty;
-		while (enemyDificulty + totalDificultyAdded > Dificulty) {
+		while (enemyDificulty + totalDificultyAdded > levelDificulty) {
 			randomNum--;
 			if (randomNum < 0) {
 				break;
