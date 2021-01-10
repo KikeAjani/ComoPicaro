@@ -102,6 +102,20 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 			tile = GetRandomTileScriptActor();
 		} while (tile->HasEnemySpawned);
 		tile->SpawnEnemy(enemyClass);
+		EnemyNum++;
 		totalDificultyAdded += enemyDificulty;
 	}
+}
+
+void AMapGenerationLevelScriptActor::SpawnPowerUp()
+{
+	int32 randomNum = FMath::RandRange(0, PowerUpTypes.Num() - 1);
+	TSubclassOf<APowerUp> powerUpClass = PowerUpTypes[randomNum];
+
+	FTransform spawnTransform; 
+
+	FActorSpawnParameters spawnParams;
+	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	AActor* enemyActor = GetWorld()->SpawnActorAbsolute(powerUpClass, spawnTransform, spawnParams);
 }

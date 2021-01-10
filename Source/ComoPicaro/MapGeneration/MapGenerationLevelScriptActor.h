@@ -6,6 +6,7 @@
 #include "Engine/LevelScriptActor.h"
 #include "Engine/LevelStreaming.h"
 #include <ComoPicaro\MapGeneration\TileLevelScriptActor.h>
+#include <ComoPicaro\Habilities\PowerUp.h>
 #include "MapGenerationLevelScriptActor.generated.h"
 
 USTRUCT()
@@ -41,6 +42,8 @@ private:
 
 	float GridCenter;
 
+	int32 EnemyNum = 0;
+
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 GridSize = 4;
@@ -53,6 +56,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TArray<TSubclassOf<AEnemy>> EnemyTypes;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		TArray<TSubclassOf<APowerUp>> PowerUpTypes;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 Dificulty = 6;
@@ -77,4 +83,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
 		void SpawnEnemies();
+
+	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
+		void SpawnPowerUp();
 };
