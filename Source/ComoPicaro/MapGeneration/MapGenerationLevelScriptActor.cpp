@@ -97,7 +97,11 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 		if (randomNum < 0) {
 			break;
 		}
-		GetRandomTileScriptActor()->SpawnEnemy(enemyClass);
+		ATileLevelScriptActor* tile;
+		do {
+			tile = GetRandomTileScriptActor();
+		} while (tile->HasEnemySpawned);
+		tile->SpawnEnemy(enemyClass);
 		totalDificultyAdded += enemyDificulty;
 	}
 }

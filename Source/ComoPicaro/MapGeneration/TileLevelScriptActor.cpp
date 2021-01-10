@@ -25,5 +25,7 @@ AEnemy* ATileLevelScriptActor::SpawnEnemy(TSubclassOf<AEnemy> enemyClass)
 	originalLocation.Z += enemyHeight;
 	enemy->SetActorLocation(originalLocation);
 
+	HasEnemySpawned = true;
+
 	return enemy;
 }
