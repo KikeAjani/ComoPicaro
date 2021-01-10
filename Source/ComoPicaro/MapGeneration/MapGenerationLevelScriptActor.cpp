@@ -120,10 +120,13 @@ void AMapGenerationLevelScriptActor::SpawnRandomPowerUp()
 	int32 randomNum = FMath::RandRange(0, PowerUpTypes.Num() - 1);
 	TSubclassOf<APowerUp> powerUpClass = PowerUpTypes[randomNum];
 
-	FTransform spawnTransform; 
+	FTransform spawnTransform;
+	spawnTransform.SetLocation(FVector(0, 0, 100));
 
 	FActorSpawnParameters spawnParams;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	AActor* enemyActor = GetWorld()->SpawnActorAbsolute(powerUpClass, spawnTransform, spawnParams);
+	AActor* powerUpActor = GetWorld()->SpawnActorAbsolute(powerUpClass, spawnTransform, spawnParams);
+
+	powerUpActor->SetActorScale3D(FVector(2, 2, 2));
 }
