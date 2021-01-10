@@ -26,6 +26,7 @@ void AWarrokBoss::BeginPlay()
 	if (ProximityDamageComponent)
 	{
 		MinTargetDistance = ProximityDamageComponent->DamageRange / 2;
+		ProximityDamageComponent->DamageRange = 0;
 	}
 }
 
@@ -136,6 +137,11 @@ void AWarrokBoss::Activate()
 	Active = true;
 	if (Health > 0)
 	{
+		UProximityDamageComponent* ProximityDamageComponent = Cast<UProximityDamageComponent>(GetComponentsByTag(UProximityDamageComponent::StaticClass(), "ProximityDamageComponent")[0]);
+		if (ProximityDamageComponent)
+		{
+			ProximityDamageComponent->DamageRange =  MinTargetDistance * 2;
+		}
 		UConstantRotationComponent* ConstantRotationComponent = Cast<UConstantRotationComponent>(GetComponentsByTag(UConstantRotationComponent::StaticClass(), "ConstantRotationComponent")[0]);
 		if (ConstantRotationComponent)
 		{
