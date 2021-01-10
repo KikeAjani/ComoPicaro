@@ -84,6 +84,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
 		void SpawnEnemies();
 
+	UFUNCTION()
+		void EnemyDeath();
+
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
-		void SpawnPowerUp();
+		void SpawnRandomPowerUp();
 };

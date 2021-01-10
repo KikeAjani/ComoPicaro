@@ -80,14 +80,14 @@ void AEnemy::SetBeaten(bool _Beaten)
 
 void AEnemy::SetDying(bool _Dying)
 {
-	Dying = _Dying;
-	if (Dying)
+	if (_Dying && (!Dying))
 	{
 		Beaten = false;
 		DeactivateCharacterMovementComponent();
 		DisableCollision();
 		DyingEnemyDelegate.Broadcast();
 	}
+	Dying = _Dying;
 }
 
 void AEnemy::DisableCollision()

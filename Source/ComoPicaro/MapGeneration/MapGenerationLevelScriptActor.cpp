@@ -100,13 +100,22 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 		do {
 			tile = GetRandomTileScriptActor();
 		} while (tile->HasEnemySpawned);
-		tile->SpawnEnemy(enemyClass);
+		AEnemy* enemy = tile->SpawnEnemy(enemyClass);
+		enemy->DyingEnemyDelegate.AddDynamic(this, &AMapGenerationLevelScriptActor::EnemyDeath);
 		EnemyNum++;
 		totalDificultyAdded += enemyDificulty;
 	}
 }
 
-void AMapGenerationLevelScriptActor::SpawnPowerUp()
+void AMapGenerationLevelScriptActor::EnemyDeath()
+{
+	EnemyNum--;
+	if (EnemyNum <= 0) {
+		SpawnRandomPowerUp();
+	}
+}
+
+void AMapGenerationLevelScriptActor::SpawnRandomPowerUp()
 {
 	int32 randomNum = FMath::RandRange(0, PowerUpTypes.Num() - 1);
 	TSubclassOf<APowerUp> powerUpClass = PowerUpTypes[randomNum];
