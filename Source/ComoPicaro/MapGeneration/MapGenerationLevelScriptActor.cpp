@@ -39,7 +39,8 @@ void AMapGenerationLevelScriptActor::GenerateRoom()
 			FVector tileLocation(tileX, tileY, 0);
 			tileTransform.SetLocation(tileLocation);
 
-			int32 randomRotation = FMath::RandRange(0, 359);
+			int32 randomRotation = FMath::RandRange(0, 3);
+			randomRotation *= 90;
 			FRotator tileRotation(0, randomRotation, 0);
 			tileTransform.SetRotation(tileRotation.Quaternion());
 
@@ -95,7 +96,11 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 		if (randomNum < 0) {
 			break;
 		}
-		GetRandomTileScriptActor()->SpawnEnemy(enemyClass);
+		ATileLevelScriptActor* tile;
+		do {
+			tile = GetRandomTileScriptActor();
+		} while (tile->HasEnemySpawned);
+		tile->SpawnEnemy(enemyClass);
 		totalDificultyAdded += enemyDificulty;
 	}
 }

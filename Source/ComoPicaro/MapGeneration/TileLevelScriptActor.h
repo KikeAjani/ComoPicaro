@@ -19,6 +19,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ATargetPoint* SpawnTargetPoint;
 
+	UPROPERTY()
+		bool HasEnemySpawned = false;
+
 	UFUNCTION()
 		AEnemy* SpawnEnemy(TSubclassOf<AEnemy> enemyClass);
 };
