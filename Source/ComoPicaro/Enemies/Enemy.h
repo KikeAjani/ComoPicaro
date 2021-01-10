@@ -6,14 +6,22 @@
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDyingEnemyDelegate);
+
 UCLASS()
 class COMOPICARO_API AEnemy : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(BlueprintAssignable)
+		FDyingEnemyDelegate DyingEnemyDelegate;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 InitialHealth;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 Dificulty;

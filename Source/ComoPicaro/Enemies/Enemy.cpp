@@ -24,6 +24,7 @@ AEnemy::AEnemy()
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	InitialHealth = Health;
 	
 }
 
@@ -80,9 +81,13 @@ void AEnemy::SetBeaten(bool _Beaten)
 void AEnemy::SetDying(bool _Dying)
 {
 	Dying = _Dying;
-	Beaten = false;
-	DeactivateCharacterMovementComponent();
-	DisableCollision();
+	if (Dying)
+	{
+		Beaten = false;
+		DeactivateCharacterMovementComponent();
+		DisableCollision();
+		DyingEnemyDelegate.Broadcast();
+	}
 }
 
 void AEnemy::DisableCollision()
