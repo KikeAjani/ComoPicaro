@@ -7,6 +7,7 @@
 #include "Engine/LevelStreaming.h"
 #include <ComoPicaro\MapGeneration\TileLevelScriptActor.h>
 #include <ComoPicaro\Habilities\PowerUp.h>
+#include <ComoPicaro\ComoPicaroGameInstance.h>
 #include "MapGenerationLevelScriptActor.generated.h"
 
 USTRUCT()
@@ -60,9 +61,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TArray<TSubclassOf<APowerUp>> PowerUpTypes;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		int32 Dificulty = 6;
-
 	UPROPERTY()
 		TArray<FTileArray> TileGrid;
 
@@ -89,4 +87,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
 		void SpawnRandomPowerUp();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = LevelBlueprint)
+		void LoadInfo();
 };

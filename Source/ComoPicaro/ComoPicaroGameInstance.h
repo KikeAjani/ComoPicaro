@@ -39,4 +39,10 @@ class COMOPICARO_API UComoPicaroGameInstance : public UGameInstance
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 			int32 NumOfFireComponents;
 
+
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+			int32 LevelDificulty = 10;
+
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+			bool HasInitiallyLoaded = false;
 };
