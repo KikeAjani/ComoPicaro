@@ -44,5 +44,5 @@ class COMOPICARO_API UComoPicaroGameInstance : public UGameInstance
 			int32 LevelDificulty = 10;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-			bool HasInitiallyLoaded = false;
+			int32 NumLevel = 1;
 };
