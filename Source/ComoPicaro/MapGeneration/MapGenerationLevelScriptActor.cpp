@@ -98,8 +98,17 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 			break;
 		}
 		ATileLevelScriptActor* tile;
+		int32 numSpawned = 0;
 		do {
 			tile = GetRandomTileScriptActor();
+			numSpawned++;
+			if (numSpawned >= GridSize * GridSize) {
+				for (int32 i = 0; i < GridSize; i++) {
+					for (int32 j = 0; j < GridSize; j++) {
+						static_cast<ATileLevelScriptActor*>(TileGrid[i][j]->GetLevelScriptActor())->HasEnemySpawned = false;
+					}
+				}
+			}
 		} while (tile->HasEnemySpawned);
 		AEnemy* enemy = tile->SpawnEnemy(enemyClass);
 		enemy->DyingEnemyDelegate.AddDynamic(this, &AMapGenerationLevelScriptActor::EnemyDeath);
