@@ -89,5 +89,8 @@ public:
 		void SpawnRandomPowerUp();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = LevelBlueprint)
+		void EndLevel();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = LevelBlueprint)
 		void LoadInfo();
 };

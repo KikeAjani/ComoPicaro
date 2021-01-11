@@ -130,4 +130,6 @@ void AMapGenerationLevelScriptActor::SpawnRandomPowerUp()
 	AActor* powerUpActor = GetWorld()->SpawnActorAbsolute(powerUpClass, spawnTransform, spawnParams);
 
 	powerUpActor->SetActorScale3D(FVector(2, 2, 2));
+
+	EndLevel();
 }
