@@ -113,6 +113,7 @@ void AMapGenerationLevelScriptActor::EnemyDeath()
 	EnemyNum--;
 	if (EnemyNum <= 0) {
 		SpawnRandomPowerUp();
+		SpawnNextLevelPortal();
 	}
 }
 
@@ -132,4 +133,16 @@ void AMapGenerationLevelScriptActor::SpawnRandomPowerUp()
 	powerUpActor->SetActorScale3D(FVector(2, 2, 2));
 
 	EndLevel();
+}
+
+void AMapGenerationLevelScriptActor::SpawnNextLevelPortal()
+{
+	FTransform spawnTransform;
+	spawnTransform.SetLocation(FVector(1500, 0, 100));
+
+	FActorSpawnParameters spawnParams;
+	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	AActor* nextLevelActor = GetWorld()->SpawnActorAbsolute(EndLevelPortalType, spawnTransform, spawnParams);
+	nextLevelActor->SetActorScale3D(FVector(3, 3, 3));
 }

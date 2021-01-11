@@ -61,6 +61,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TArray<TSubclassOf<APowerUp>> PowerUpTypes;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		TSubclassOf<class AActor> EndLevelPortalType;
+
 	UPROPERTY()
 		TArray<FTileArray> TileGrid;
 
@@ -87,6 +90,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
 		void SpawnRandomPowerUp();
+
+	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
+		void SpawnNextLevelPortal();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = LevelBlueprint)
 		void EndLevel();
