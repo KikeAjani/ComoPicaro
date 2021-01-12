@@ -49,7 +49,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int32 ExtraDamageSimpleAttack;
 
-	//TArray<APowerUp*> ListOfHabilities;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 PointsToUltimate;
 

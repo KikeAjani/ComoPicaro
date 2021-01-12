@@ -20,12 +20,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 		FPowerUpPickedDelegate PowerUpPickedDelegate;
-// 
-// 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-// 		class UStaticMeshComponent* StaticMeshPowerUp;
-// 
-// 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-// 		class UBoxComponent* BoxComponent;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,7 +32,4 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DelegateBroadcast();
-	
-// 	UFUNCTION()
-// 	void OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };
