@@ -43,7 +43,7 @@ AMainCharacter::AMainCharacter()
 	UltimateFireComponent = CreateDefaultSubobject<UFireComponent>(TEXT("UltimateFireComponent"));
 	IsDead = false;
 
-	PointsToUltimate = 100;
+	PointsToUltimate = 0;
 }
 
 // Called when the game starts or when spawned
@@ -176,7 +176,7 @@ void AMainCharacter::OnUltimate()
 		info.Linkage = 1;
 		info.ExecutionFunction = FName("MUltimate");
 		RotationToAttack(info);
-		PointsToUltimate = 100;
+		PointsToUltimate = 0;
 	}
 }
 

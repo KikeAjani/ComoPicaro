@@ -23,6 +23,9 @@ class COMOPICARO_API UComoPicaroGameInstance : public UGameInstance
 
 		//-----------------------------------------------
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+			int32 PointsToUltimate;
+
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		 int32 ActualHealth;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

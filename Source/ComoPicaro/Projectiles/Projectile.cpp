@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "../Enemies/Enemy.h"
 #include "../Characters/MainCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -39,6 +40,10 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 	if (Enemy)
 	{
 		Enemy->Damage(Damage);
+		AMainCharacter* MainCharacter = Cast<AMainCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+		MainCharacter->PointsToUltimate += 5;
+
+
 	}
 	else
 	{
@@ -46,7 +51,6 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 		if (MainCharacter)
 		{
 			MainCharacter->Damage(Damage);
-			UE_LOG(LogTemp, Warning, TEXT("Character Health: %0.0f"), MainCharacter->Health);
 		}
 	}
 	Destroy();

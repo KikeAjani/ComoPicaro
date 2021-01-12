@@ -50,8 +50,8 @@ public:
 		int32 ExtraDamageSimpleAttack;
 
 	//TArray<APowerUp*> ListOfHabilities;
-
-	int PointsToUltimate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 PointsToUltimate;
 
 private:
 	float TimeSinceLastSimpleAttack;
