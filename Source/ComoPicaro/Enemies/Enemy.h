@@ -6,7 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDyingEnemyDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDyingEnemyDelegate, FVector, ActorLocation);
 
 UCLASS()
 class COMOPICARO_API AEnemy : public ACharacter

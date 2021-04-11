@@ -85,7 +85,7 @@ void AEnemy::SetDying(bool _Dying)
 		Beaten = false;
 		DeactivateCharacterMovementComponent();
 		DisableCollision();
-		DyingEnemyDelegate.Broadcast();
+		DyingEnemyDelegate.Broadcast(GetActorLocation());
 	}
 	Dying = _Dying;
 }

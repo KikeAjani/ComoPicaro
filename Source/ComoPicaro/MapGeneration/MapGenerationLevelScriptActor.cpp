@@ -117,22 +117,22 @@ void AMapGenerationLevelScriptActor::SpawnEnemies()
 	}
 }
 
-void AMapGenerationLevelScriptActor::EnemyDeath()
+void AMapGenerationLevelScriptActor::EnemyDeath(FVector ActorLocation)
 {
 	EnemyNum--;
 	if (EnemyNum <= 0) {
-		SpawnRandomPowerUp();
+		SpawnRandomPowerUp(ActorLocation);
 		SpawnNextLevelPortal();
 	}
 }
 
-void AMapGenerationLevelScriptActor::SpawnRandomPowerUp()
+void AMapGenerationLevelScriptActor::SpawnRandomPowerUp(FVector ActorLocation)
 {
 	int32 randomNum = FMath::RandRange(0, PowerUpTypes.Num() - 1);
 	TSubclassOf<APowerUp> powerUpClass = PowerUpTypes[randomNum];
 
 	FTransform spawnTransform;
-	spawnTransform.SetLocation(FVector(0, 0, 100));
+	spawnTransform.SetLocation(FVector(ActorLocation.X, ActorLocation.Y, 100));
 
 	FActorSpawnParameters spawnParams;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
@@ -147,7 +147,7 @@ void AMapGenerationLevelScriptActor::SpawnRandomPowerUp()
 void AMapGenerationLevelScriptActor::SpawnNextLevelPortal()
 {
 	FTransform spawnTransform;
-	spawnTransform.SetLocation(FVector(1500, 0, 100));
+	spawnTransform.SetLocation(FVector(1500, 0, 130));
 
 	FActorSpawnParameters spawnParams;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;

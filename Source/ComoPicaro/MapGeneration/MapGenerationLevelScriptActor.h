@@ -86,10 +86,10 @@ public:
 		void SpawnEnemies();
 
 	UFUNCTION()
-		void EnemyDeath();
+		void EnemyDeath(FVector ActorLocation);
 
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
-		void SpawnRandomPowerUp();
+		void SpawnRandomPowerUp(FVector ActorLocation);
 
 	UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
 		void SpawnNextLevelPortal();
